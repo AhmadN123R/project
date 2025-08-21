@@ -1,0 +1,156 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    margin: 0; /* hilangkan jarak luar */
+    background: white;
+    border-radius: 0px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.header {
+    background: linear-gradient(90deg, #2c3e50, #34495e);
+    color: white;
+    padding: 10px;
+    padding-left: 220px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: left;
+}
+
+.main-layout {
+    display: flex;
+    min-height: 488px;
+}
+
+.menu {
+    background: #3498db;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 9999;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+    transition: background 0.3s, border-left 0.3s;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    background: #2980b9;
+    color: #fff;
+    transition: background 0.3s, transform 0,2s;
+    transform: scale(1.05);
+}
+
+.content {
+    flex: 1;
+    padding: 15px;
+    background: #fff;
+    margin-left: 200px;
+}
+
+.footer {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 28px;
+    font-size: 0.9em;
+    margin-left: 200px;
+}
+
+/* Animasi fade-in */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.btn-tambah {
+    background: #2ecc71; /* hijau */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn-tambah:hover {
+    background: #27ae60; /* hijau lebih gelap */
+    transform: scale(1.05); /* membesar sedikit saat hover */
+}
+
+.menu a.active {
+    background: rgba(255, 255, 255, 0.3); /* warna sorotan */
+    border-left: 4px solid #fff;          /* garis di kiri untuk penanda */
+    font-weight: bold;
+}
+
+.logo {
+    height: 50px;
+    width: auto;
+    margin-right: 15px;
+}
+
+.judul h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.judul p {
+    margin: 0;
+    font-size: 1em;
+}
+
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-img {
+    width: auto;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #3498db;
+    padding: 2px;
+    background-color: white;
+}
+
+.profile-btn {
+    margin-top: 8px;
+    padding: 8px 12px;
+    background-color: white;
+    color: #3498db;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.profile-btn:hover {
+    background-color: #3498db;
+    color: white;
+}
