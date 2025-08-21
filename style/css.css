@@ -1,8 +1,9 @@
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #f4f4f4;
+body, html {
+    font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f8f9fa;
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
 .container {
@@ -15,14 +16,10 @@ body {
 }
 
 .header {
-    background: linear-gradient(90deg, #2c3e50, #34495e);
-    color: white;
-    padding: 10px;
-    padding-left: 220px;
+    padding: 0 15px;
     display: flex;
     align-items: center;
-    gap: 8px;
-    text-align: left;
+    height: 60px;
 }
 
 .main-layout {
@@ -31,48 +28,37 @@ body {
 }
 
 .menu {
-    background: #3498db;
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-    padding: 15px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    z-index: 9999;
+    background: #fff;
+    width: 250px;
+    min-height: 100vh;
+    border-right: 1px solid #dee2e6;
 }
 
 .menu a {
-    color: white;
+    color: #333;
     text-decoration: none;
-    padding: 10px 20px;
-    display: block;
-    transition: background 0.3s, border-left 0.3s;
-    font-weight: bold;
+    padding: 10px 12px;
+    display: flex;
+    transition: background 0.2s ease;
+    gap: 10px;
+    border-radius: 8px;
+    align-items: center;
 }
 
 .menu a:hover {
-    background: #2980b9;
-    color: #fff;
-    transition: background 0.3s, transform 0,2s;
-    transform: scale(1.05);
+    background: #f1f1f1;
 }
 
 .content {
-    flex: 1;
-    padding: 15px;
-    background: #fff;
-    margin-left: 200px;
+    flex-grow: 1;
+    padding: 20px;
+    background: #fdfdfd;
 }
 
 .footer {
-    background: #2c3e50;
+    background: #212529;
     color: white;
-    text-align: center;
-    padding: 28px;
-    font-size: 0.9em;
-    margin-left: 200px;
+    font-size: 14px;
 }
 
 /* Animasi fade-in */
@@ -105,9 +91,7 @@ body {
 }
 
 .logo {
-    height: 50px;
-    width: auto;
-    margin-right: 15px;
+    height: 45px;
 }
 
 .judul h1 {
@@ -120,30 +104,14 @@ body {
     font-size: 1em;
 }
 
-.profile-section {
-   text-align: center;
-   padding: 15px;
-   border-bottom: 1px solid #ccc;
-   margin-bottom: 10px;
+.profile-section img {
+   border: 3px solid #0d6efd;
+   object-fit: cover;
 }
 
-.profile-img {
-    width: auto;
-    height: 60px;
-    border-radius: 50%;
-    display: block;
-    margin: 0 auto 10px;
-    border: 2px solid #3498db;
-}
-
-.profile-btn {
-    display: inline-block;
-    padding: 8px 12px;
-    background-color: white;
-    color: #3498db;
-    border: 2px solid #3498db;
-    border-radius: 5px;
-    cursor: pointer;
+.profile-section button {
+    margin-top: 10px;
+    border-radius: 20px;
 }
 
 .profile-btn:hover {

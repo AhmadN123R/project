@@ -2,29 +2,50 @@
 <html>
 <head>
     <title>Website PHP Native</title>
-    <link rel="stylesheet" href="style/css.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">    <link rel="stylesheet" href="style/css.css">
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <img src="pngegg.PNG" alt="Logo" class="logo">
-        <?php include 'modul/layouts/header.php'; ?>
+<div class="container-fluid p-0">
+   <!-- Header -->
+<nav class="navbar navbar-dark bg-primary px-3">
+  <button class="btn btn-outline-light me-2" data-bs-toggle="collapse" data-bs-target="#sidebar">
+    ☰
+  </button>
+</nav>
+
+<div class="d-flex">
+  <!-- Sidebar -->
+  <div class="collapse show" id="sidebar">
+    <div class="menu p-3">
+      <div class="profile-section text-center mb-4">
+        <img src="profil.jpeg" alt="Profile" class="rounded-circle" width="100" height="100">
+        <button class="btn btn-outline-primary w-100 mt-2">Lihat Profil</button>
+      </div>
+      <a href="#"><i class="bi bi-house"></i> Beranda</a>
+      <a href="#"><i class="bi bi-list-task"></i> Daftar Tugas</a>
+      <a href="#"><i class="bi bi-people"></i> Pengguna</a>
+      <a href="#"><i class="bi bi-graph-up"></i> Statistik</a>
     </div>
-    <div class="main-layout">
-        <div class="menu">
-            <div class="profile-section">
-                <img src="profil.jpeg" alt="Foto Profil" class="profile-img">
-                <button class="profile-btn">Lihat Profil</button>
-            </div>
-            <?php include 'modul/menu/menu.php'; ?>
-        </div>
-        <div class="content">
-            <?php include 'modul/layouts/content.php'; ?>
-        </div>
-    </div>
-    <div class="footer">
-        <?php include 'modul/layouts/footer.php'; ?>
-    </div>
+  </div>
+
+  <!-- Konten -->
+  <div class="content flex-grow-1 p-4">
+    <h2 class="fw-bold">Daftar Tugas</h2>
+    <ul>
+      <li>Menyelesaikan laporan</li>
+      <li>Mengupdate data aplikasi</li>
+      <li>Mengecek progres pengguna</li>
+    </ul>
+  </div>
 </div>
+
+<!-- Footer -->
+<footer class="footer text-center py-3">
+  © 2025 Belajar PHP Native | Dibuat dengan ❤️ dan PHP
+</footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
