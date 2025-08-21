@@ -6,48 +6,71 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="style/css.css">
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body>
+<div class="container-fluid p-0 d-flex flex-column min-vh-100">
     <!-- Header -->
     <nav class="navbar navbar-dark bg-primary px-3">
-        <button class="btn btn-outline-light me-2" data-bs-toggle="collapse" data-bs-target="#sidebar">
-            ☰
-        </button>
-        <span class="navbar-brand mb-0 h1">Aplikasi Sederhana</span>
-        <img src="pngegg.png" alt="Logo" class="rounded-circle" width="50" height="50">
+      <button class="btn btn-outline-light me-2" data-bs-toggle="collapse" data-bs-target="#sidebar">
+        ☰
+      </button>
+      <span class="navbar-brand mb-0 h1">Aplikasi Sederhana</span>
+      <img src="pngegg.png" alt="Logo" class="rounded-circle" width="50" height="50">
     </nav>
 
-    <!-- Main Layout -->
     <div class="d-flex flex-grow-1">
         <!-- Sidebar -->
         <div class="collapse show bg-light border-end" id="sidebar">
-            <div class="menu p-3 h-100">
+            <div class="menu p-3 h-100 d-flex flex-column">
                 <div class="profile-section text-center mb-4 border-bottom pb-3">
                     <img src="profil.jpeg" alt="Profile" class="rounded-circle border" width="100" height="100">
                     <button class="btn btn-outline-primary w-100 mt-2">Lihat Profil</button>
                 </div>
-                <a href="#" class="d-block mb-2"><i class="bi bi-house"></i> Beranda</a>
-                <a href="#" class="d-block mb-2"><i class="bi bi-list-task"></i> Daftar Tugas</a>
-                <a href="#" class="d-block mb-2"><i class="bi bi-people"></i> Pengguna</a>
-                <a href="#" class="d-block mb-2"><i class="bi bi-graph-up"></i> Statistik</a>
+                <!-- Menu dengan link ke index.php?page=... -->
+                <a href="index.php?page=dashboard" class="d-block mb-1"><i class="bi bi-house"></i> Dashboard</a>
+                <a href="index.php?page=apps" class="d-block mb-1"><i class="bi bi-app"></i> Apps</a>
+                <a href="index.php?page=users" class="d-block mb-1"><i class="bi bi-people"></i> Users</a>
+                <a href="index.php?page=todos" class="d-block mb-1"><i class="bi bi-list-task"></i> Todos</a>
+                <a href="index.php?page=laporan" class="d-block mb-1"><i class="bi bi-graph-up"></i> Pelaporan</a>
+                <a href="logout.php" class="d-block mt-auto btn btn-danger"><i class="bi bi-box-arrow-right"></i> Log OUT</a>
             </div>
         </div>
 
         <!-- Konten -->
         <div class="content flex-grow-1 p-4">
-            <h2 class="fw-bold">Daftar Tugas</h2>
-            <ul>
-                <li>Menyelesaikan laporan</li>
-                <li>Mengupdate data aplikasi</li>
-                <li>Mengecek progres pengguna</li>
-            </ul>
+            <?php
+            // cek apakah ada parameter page
+            $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
+            
+            // mapping halaman ke file
+            $pages = [
+                "dashboard" => "modul/dashboard/dashboard.php",
+                "apps"      => "modul/data/apps.php",
+                "users"     => "modul/data/users.php",
+                "todos"     => "modul/todos/todos.php",
+                "laporan"   => "modul/pelaporan/pelaporan.php"
+            ];
+
+            // cek apakah page ada di mapping
+            if (array_key_exists($page, $pages)) {
+                $file = $pages[$page];
+                if (file_exists($file)) {
+                    include $file;
+                } else {
+                    echo "<h3>File <code>$file</code> tidak ditemukan!</h3>";
+                }
+            } else {
+                echo "<h3>Halaman tidak ditemukan!</h3>";
+            }
+            ?>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="footer text-center py-3 bg-dark text-white mt-auto">
-        © 2025 Belajar PHP Native | Dibuat dengan ❤️ dan PHP
+    <footer class="footer text-center py-3 bg-dark text-light mt-auto">
+      © 2025 Belajar PHP Native | Dibuat dengan ❤️ dan PHP
     </footer>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
