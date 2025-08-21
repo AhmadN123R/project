@@ -35,13 +35,13 @@ body, html {
 }
 
 .menu a {
-    color: #333;
+    color: #1e1e1e;
     text-decoration: none;
-    padding: 10px 12px;
-    display: flex;
+    padding: 10px;
+    display: block;
     transition: background 0.2s ease;
-    gap: 10px;
-    border-radius: 8px;
+    margin-bottom: auto;
+    border-radius: 6px;
     align-items: center;
 }
 
