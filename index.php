@@ -12,6 +12,8 @@
   <button class="btn btn-outline-light me-2" data-bs-toggle="collapse" data-bs-target="#sidebar">
     ☰
   </button>
+  <span class="navbar-brand mb-0 h1">Aplikasi Sederhana</span>
+  <img src="pngegg.png" alt="Logo" class="rounded-circle" width="50" height="50">
 </nav>
 
 <div class="d-flex">
