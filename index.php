@@ -21,48 +21,49 @@
         <!-- Sidebar -->
         <div class="collapse show bg-light border-end" id="sidebar">
             <div class="menu p-3 h-100 d-flex flex-column">
-                <div class="profile-section text-center mb-4 border-bottom pb-3">
-                    <img src="profil.jpeg" alt="Profile" class="rounded-circle border" width="100" height="100">
-                    <button class="btn btn-outline-primary w-100 mt-2">Lihat Profil</button>
-                </div>
-                <!-- Menu dengan link ke index.php?page=... -->
-                <a href="index.php?page=dashboard" class="d-block mb-1"><i class="bi bi-house"></i> Dashboard</a>
-                <a href="index.php?page=apps" class="d-block mb-1"><i class="bi bi-app"></i> Apps</a>
-                <a href="index.php?page=users" class="d-block mb-1"><i class="bi bi-people"></i> Users</a>
-                <a href="index.php?page=todos" class="d-block mb-1"><i class="bi bi-list-task"></i> Todos</a>
-                <a href="index.php?page=laporan" class="d-block mb-1"><i class="bi bi-graph-up"></i> Pelaporan</a>
-                <a href="logout.php" class="d-block mt-auto btn btn-danger"><i class="bi bi-box-arrow-right"></i> Log OUT</a>
-            </div>
+    <div class="profile-section text-center mb-4 border-bottom pb-3">
+        <img src="profil.jpeg" alt="Profile" class="rounded-circle border" width="100" height="100">
+        <button class="btn btn-outline-primary w-100 mt-2">Lihat Profil</button>
+    </div>
+
+    <?php include 'modul/menu/menu.php'; ?>
+</div>
         </div>
 
         <!-- Konten -->
-        <div class="content flex-grow-1 p-4">
-            <?php
-            // cek apakah ada parameter page
-            $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
-            
-            // mapping halaman ke file
-            $pages = [
-                "dashboard" => "modul/dashboard/dashboard.php",
-                "apps"      => "modul/data/apps.php",
-                "users"     => "modul/data/users.php",
-                "todos"     => "modul/todos/todos.php",
-                "laporan"   => "modul/pelaporan/pelaporan.php"
-            ];
+        <div class="content flex-grow-1 d-flex flex-column">
+            <main class="flex-grow-1 p-4">
+                <?php
+                // cek apakah ada parameter page
+                $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
+                
+                // mapping halaman ke file
+                $pages = [
+                    "dashboard" => "modul/dashboard/dashboard.php",
+                    "apps"      => "modul/data/apps.php",
+                    "users"     => "modul/data/users.php",
+                    "todos"     => "modul/todos/todos.php",
+                    "laporan"   => "modul/pelaporan/pelaporan.php"
+                ];
 
-            // cek apakah page ada di mapping
-            if (array_key_exists($page, $pages)) {
-                $file = $pages[$page];
-                if (file_exists($file)) {
-                    include $file;
+                // cek apakah page ada di mapping
+                if (array_key_exists($page, $pages)) {
+                    $file = $pages[$page];
+                    if (file_exists($file)) {
+                        include $file;
+                    } else {
+                        echo "<h3>File <code>$file</code> tidak ditemukan!</h3>";
+                    }
                 } else {
-                    echo "<h3>File <code>$file</code> tidak ditemukan!</h3>";
+                    echo "<h3>Halaman tidak ditemukan!</h3>";
                 }
-            } else {
-                echo "<h3>Halaman tidak ditemukan!</h3>";
-            }
-            ?>
+                ?>
+            </main>
+
+            <!-- Footer (hanya selebar konten, tidak sampai sidebar) -->
+            <?php include 'modul/layouts/footer.php'; ?>
         </div>
     </div>
+</div>
 </body>
 </html>

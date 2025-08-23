@@ -61,6 +61,8 @@ body, html {
     flex: 1;
     padding: 20px;
     background: #fdfdfd;
+    margin-left: 250px;
+    margin-top: 56px;
 }
 
 .footer {
@@ -126,4 +128,21 @@ body, html {
 .profile-btn:hover {
     background-color: #3498db;
     color: white;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+}
+
+.sidebar {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    overflow-y: auto;
 }
