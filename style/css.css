@@ -1,16 +1,13 @@
 body, html {
-    font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #f8f9fa;
     margin: 0;
     padding: 0;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
 }
 
 .container {
     width: 100%;
-    margin: 0; /* hilangkan jarak luar */
+    margin: 0;
     background: white;
     border-radius: 0px;
     overflow: hidden;
@@ -18,8 +15,6 @@ body, html {
 }
 
 .container-fluid {
-    display: flex;
-    flex-direction: column;
     min-height: 100vh;
 }
 
@@ -32,23 +27,23 @@ body, html {
 
 .main-layout {
     display: flex;
-    min-height: 488px;
+    min-height: calc(100vh - 60px);
 }
 
 .menu {
     background: #fff;
     width: 250px;
-    min-height: 100vh;
     border-right: 1px solid #dee2e6;
+    padding: 15px;
 }
 
 .menu a {
     color: #1e1e1e;
     text-decoration: none;
-    padding: 10px;
+    padding: 12px 15px;
     display: block;
     transition: background 0.2s ease;
-    margin-bottom: auto;
+    margin-bottom: 5px;
     border-radius: 6px;
     align-items: center;
 }
@@ -57,12 +52,18 @@ body, html {
     background: #f1f1f1;
 }
 
+.menu a.active {
+    background: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
 .content {
     flex: 1;
     padding: 20px;
     background: #fdfdfd;
-    margin-left: 250px;
-    margin-top: 56px;
+    overflow-y: auto;
+    max-height: calc(100vh - 60px);
 }
 
 .footer {
@@ -70,6 +71,7 @@ body, html {
     color: white;
     font-size: 14px;
     margin-top: auto;
+    position: relative;
 }
 
 /* Animasi fade-in */
@@ -79,7 +81,7 @@ body, html {
 }
 
 .btn-tambah {
-    background: #2ecc71; /* hijau */
+    background: #2ecc71;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -91,14 +93,8 @@ body, html {
 }
 
 .btn-tambah:hover {
-    background: #27ae60; /* hijau lebih gelap */
-    transform: scale(1.05); /* membesar sedikit saat hover */
-}
-
-.menu a.active {
-    background: rgba(255, 255, 255, 0.3); /* warna sorotan */
-    border-left: 4px solid #fff;          /* garis di kiri untuk penanda */
-    font-weight: bold;
+    background: #27ae60;
+    transform: scale(1.05);
 }
 
 .logo {
@@ -115,34 +111,240 @@ body, html {
     font-size: 1em;
 }
 
+/* ===== STYLING PROFIL DENGAN BORDER MENARIK ===== */
+.profile-section {
+    position: relative;
+}
+
 .profile-section img {
-   border: 3px solid #0d6efd;
-   object-fit: cover;
+    /* Border dengan gradient dan shadow yang menarik */
+    border: 4px solid #ffffff;
+    box-shadow: 
+        0 0 0 3px #007bff,           /* Border kedua biru */
+        0 4px 12px rgba(0,123,255,0.3), /* Shadow biru */
+        0 2px 8px rgba(0,0,0,0.1);      /* Shadow hitam tipis */
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+.profile-section img:hover {
+    /* Efek hover yang smooth */
+    transform: scale(1.05);
+    box-shadow: 
+        0 0 0 4px #007bff,
+        0 8px 20px rgba(0,123,255,0.4),
+        0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Status online indicator (opsional) */
+.profile-section::after {
+    content: '';
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    width: 18px;
+    height: 18px;
+    background: #28a745;
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .profile-section button {
     margin-top: 10px;
     border-radius: 20px;
+    transition: all 0.3s ease;
 }
 
-.profile-btn:hover {
-    background-color: #3498db;
+.profile-section button:hover {
+    background-color: #007bff;
     color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,123,255,0.3);
 }
 
+/* ===== NAVBAR STYLING ===== */
 .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    position: relative;
     z-index: 1030;
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important;
 }
 
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+/* ===== SIDEBAR STYLING ===== */
 .sidebar {
-    position: fixed;
-    top: 56px;
-    left: 0;
-    bottom: 0;
-    width: 250px;
+    position: relative;
     overflow-y: auto;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .menu {
+        width: 100%;
+        position: absolute;
+        z-index: 1000;
+        background: white;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    }
+    
+    .content {
+        margin-left: 0;
+        margin-top: 0;
+    }
+    
+    .profile-section img {
+        border-width: 3px;
+        width: 80px;
+        height: 80px;
+    }
+    
+    .profile-section::after {
+        width: 15px;
+        height: 15px;
+        bottom: 8px;
+        right: 8px;
+    }
+}
+
+@media (max-width: 576px) {
+    .profile-section img {
+        width: 70px;
+        height: 70px;
+        border-width: 2px;
+    }
+    
+    .menu a {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+}
+
+/* ===== UTILITAS FLEXBOX ===== */
+* {
+    box-sizing: border-box;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.flex-grow-1 {
+    flex-grow: 1 !important;
+}
+
+.flex-column {
+    flex-direction: column !important;
+}
+
+/* ===== ANIMASI LOADING (OPSIONAL) ===== */
+.content {
+    animation: fadeIn 0.5s ease-in;
+}
+
+/* ===== HOVER EFFECTS UNTUK MENU ===== */
+.menu a {
+    position: relative;
+    overflow: hidden;
+}
+
+.menu a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0,123,255,0.1), transparent);
+    transition: left 0.5s;
+}
+
+.menu a:hover::before {
+    left: 100%;
+}
+
+/* ===== CARD STYLING UNTUK KONTEN ===== */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+/* ===== BUTTON STYLING TAMBAHAN ===== */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    border: none;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+    border: none;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    border: none;
+}
+
+/* ===== SCROLLBAR CUSTOM ===== */
+.content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.content::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* ===== DARK MODE SUPPORT (OPSIONAL) ===== */
+@media (prefers-color-scheme: dark) {
+    body, html {
+        background: #1a1a1a;
+        color: #ffffff;
+    }
+    
+    .menu {
+        background: #2d2d2d;
+        border-right-color: #404040;
+    }
+    
+    .content {
+        background: #1e1e1e;
+    }
+    
+    .menu a {
+        color: #ffffff;
+    }
+    
+    .menu a:hover {
+        background: #404040;
+    }
 }
