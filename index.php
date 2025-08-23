@@ -43,7 +43,8 @@
                     "apps"      => "modul/data/apps.php",
                     "users"     => "modul/data/users.php",
                     "todos"     => "modul/todos/todos.php",
-                    "laporan"   => "modul/pelaporan/pelaporan.php"
+                    "laporan"   => "modul/pelaporan/pelaporan.php",
+                    "settings"  => "modul/settings/settings.php",    // Tambah ini
                 ];
 
                 // cek apakah page ada di mapping

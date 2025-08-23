@@ -1,4 +1,4 @@
-<h2>👥 Data pengguna</h2>
+<h2><i class="bi bi-people"></i> User</h2>
 <p>Daftar Pengguna yang terdaftar di sistem:</p>
 <ul>
     <li>Pengguna 1</li>

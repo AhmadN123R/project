@@ -1,7 +1,7 @@
 <div class="settings-container">
     <div class="page-header">
         <h2><i class="bi bi-gear me-2"></i> Settings</h2>
-        <p class="text-muted">Kelola pengaturan aplikasi dan preferensi Anda</p>
+        <p>Kelola pengaturan aplikasi dan preferensi Anda</p>
     </div>
 
     <div class="row">
