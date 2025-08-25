@@ -1,4 +1,4 @@
-<h2>📦 Data Aplikasi</h2>
+<h2><i class="bi bi-app-indicator"></i> Data Aplikasi</h2>
 <p>Daftar aplikasi yang terdaftar di sistem:</p>
 <ul>
     <li>Aplikasi Keuangan</li>
