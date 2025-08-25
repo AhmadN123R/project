@@ -1,188 +1,165 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#ffffff">
-    <title>Website PHP Native</title>
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    
-    <!-- Custom Theme CSS -->
-    <link rel="stylesheet" href="style/css.css">
-</head>
-<body>
-<div class="container-fluid p-0 d-flex flex-column min-vh-100">
-    <!-- Header -->
-    <nav class="navbar navbar-dark bg-primary px-3">
-      <button class="btn btn-outline-light me-2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-expanded="false" aria-controls="sidebar">
-        ☰
-      </button>
-      <span class="navbar-brand mb-0 h1">Aplikasi Sederhana</span>
-      <img src="pngegg.png" alt="Logo" class="rounded-circle" width="50" height="50">
-    </nav>
+<?php
+// ===== KONFIGURASI HALAMAN =====
+$page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
+
+// Page configurations
+$page_configs = [
+    'dashboard' => [
+        'title' => 'Dashboard',
+        'description' => 'Halaman utama aplikasi dengan ringkasan informasi',
+        'file' => 'modul/dashboard/dashboard.php'
+    ],
+    'apps' => [
+        'title' => 'Data Aplikasi',
+        'description' => 'Manajemen data aplikasi yang terdaftar',
+        'file' => 'modul/data/apps.php'
+    ],
+    'users' => [
+        'title' => 'Data Pengguna',
+        'description' => 'Manajemen data pengguna sistem',
+        'file' => 'modul/data/users.php'
+    ],
+    'todos' => [
+        'title' => 'Daftar Tugas',
+        'description' => 'Manajemen tugas dan aktivitas',
+        'file' => 'modul/todos/todos.php'
+    ],
+    'laporan' => [
+        'title' => 'Pelaporan',
+        'description' => 'Laporan dan statistik sistem',
+        'file' => 'modul/pelaporan/pelaporan.php'
+    ],
+    'settings' => [
+        'title' => 'Pengaturan',
+        'description' => 'Konfigurasi dan preferensi aplikasi',
+        'file' => 'modul/settings/settings.php'
+    ]
+];
+
+// Set page variables
+$current_config = isset($page_configs[$page]) ? $page_configs[$page] : null;
+
+if ($current_config) {
+    $page_title = $current_config['title'];
+    $page_description = $current_config['description'];
+    $page_file = $current_config['file'];
+} else {
+    $page_title = 'Halaman Tidak Ditemukan';
+    $page_description = 'Halaman yang Anda cari tidak tersedia';
+    $page_file = null;
+}
+
+// ===== KONFIGURASI APLIKASI =====
+$app_title = 'Aplikasi Sederhana';
+$app_version = '1.0.0';
+$user_name = 'Admin User'; // Dari session atau database
+$user_avatar = 'pngegg.png';
+$footer_text = 'Belajar PHP Native';
+
+// ===== KONFIGURASI OPTIONAL =====
+$show_notifications = true;
+$notification_count = 3; // Dari database
+$show_version = true;
+
+// CSS dan JS tambahan jika diperlukan
+$additional_css = [];
+$additional_js = [];
+
+// Script khusus per halaman
+$page_script = '';
+$page_style = '';
+
+// Contoh: CSS khusus untuk halaman settings
+if ($page === 'settings') {
+    $page_style = '
+        .settings-wrapper {
+            animation: fadeInUp 0.5s ease-out;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    ';
+}
+
+// Include header
+include 'modul/layouts/header.php';
+?>
 
     <div class="d-flex flex-grow-1">
         <!-- Sidebar -->
         <div class="collapse collapse-horizontal show bg-light border-end" id="sidebar">
             <div class="menu p-3 h-100 d-flex flex-column" style="min-width: 250px;">
+                <!-- Profile Section -->
                 <div class="profile-section text-center mb-4 border-bottom pb-3">
-                    <img src="profil.jpeg" alt="Profile" class="rounded-circle border" width="100" height="100">
-                    <button class="btn btn-outline-primary w-100 mt-2">Lihat Profil</button>
+                    <img src="<?php echo $user_avatar; ?>" 
+                         alt="Profile" 
+                         class="rounded-circle border" 
+                         width="100" 
+                         height="100">
+                    <button class="btn btn-outline-primary w-100 mt-2" onclick="showProfile()">
+                        <i class="bi bi-person me-2"></i>Lihat Profil
+                    </button>
                 </div>
 
+                <!-- Menu Navigation -->
                 <?php include 'modul/menu/menu.php'; ?>
             </div>
         </div>
 
-        <!-- Konten -->
+        <!-- Content Area -->
         <div class="content flex-grow-1 d-flex flex-column">
             <main class="flex-grow-1 p-4">
-                <?php
-                // cek apakah ada parameter page
-                $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
-                
-                // mapping halaman ke file
-                $pages = [
-                    "dashboard" => "modul/dashboard/dashboard.php",
-                    "apps"      => "modul/data/apps.php",
-                    "users"     => "modul/data/users.php",
-                    "todos"     => "modul/todos/todos.php",
-                    "laporan"   => "modul/pelaporan/pelaporan.php",
-                    "settings"  => "modul/settings/settings.php",
-                ];
+                <!-- Breadcrumb -->
+                <nav aria-label="breadcrumb" class="mb-3">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.php" class="text-decoration-none">
+                                <i class="bi bi-house me-1"></i>Home
+                            </a>
+                        </li>
+                        <?php if ($page !== 'dashboard'): ?>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <?php echo $page_title; ?>
+                            </li>
+                        <?php endif; ?>
+                    </ol>
+                </nav>
 
-                // cek apakah page ada di mapping
-                if (array_key_exists($page, $pages)) {
-                    $file = $pages[$page];
-                    if (file_exists($file)) {
-                        include $file;
-                    } else {
-                        echo "<h3>File <code>$file</code> tidak ditemukan!</h3>";
-                    }
+                <!-- Page Content -->
+                <?php
+                if ($page_file && file_exists($page_file)) {
+                    include $page_file;
                 } else {
-                    echo "<h3>Halaman tidak ditemukan!</h3>";
+                    ?>
+                    <div class="alert alert-warning" role="alert">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        <strong>Halaman Tidak Ditemukan!</strong>
+                        <?php if ($page_file): ?>
+                            <p class="mb-0 mt-2">File <code><?php echo $page_file; ?></code> tidak ditemukan.</p>
+                        <?php else: ?>
+                            <p class="mb-0 mt-2">Halaman "<?php echo htmlspecialchars($page); ?>" tidak tersedia.</p>
+                        <?php endif; ?>
+                        <hr>
+                        <a href="index.php" class="btn btn-primary btn-sm">
+                            <i class="bi bi-arrow-left me-2"></i>Kembali ke Dashboard
+                        </a>
+                    </div>
+                    <?php
                 }
                 ?>
             </main>
 
-            <!-- Footer -->
-            <?php include 'modul/layouts/footer.php'; ?>
-        </div>
-    </div>
-</div>
-
-<!-- Bootstrap JavaScript Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Theme Management Script -->
-<script src="js/theme.js"></script>
-
-<script>
-// Initialize theme system
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize theme manager
-    window.themeManager = new ThemeManager();
-    
-    // Initialize settings theme integration
-    if (document.getElementById('darkModeToggle')) {
-        initializeSettingsTheme();
-    }
-    
-    // Listen for theme changes to update logout modal
-    window.addEventListener('themeChanged', updateLogoutModalTheme);
-});
-
-// Auto-hide sidebar pada mobile setelah klik menu
-document.querySelectorAll('.menu a').forEach(link => {
-    link.addEventListener('click', function() {
-        if (window.innerWidth <= 768) {
-            const sidebar = document.getElementById('sidebar');
-            const bsCollapse = new bootstrap.Collapse(sidebar);
-            bsCollapse.hide();
-        }
-    });
-});
-
-// Toggle sidebar dengan smooth animation
-document.querySelector('[data-bs-target="#sidebar"]').addEventListener('click', function() {
-    const sidebar = document.getElementById('sidebar');
-    const isShown = sidebar.classList.contains('show');
-    
-    if (!isShown) {
-        sidebar.style.animation = 'slideInLeft 0.3s ease-out';
-    } else {
-        sidebar.style.animation = 'slideOutLeft 0.3s ease-in';
-    }
-});
-
-// Logout function with theme awareness
-function handleLogout(button) {
-    // Show loading state
-    button.classList.add('btn-loading');
-    button.disabled = true;
-    
-    // Simulate logout process
-    setTimeout(() => {
-        // Hide logout modal
-        const logoutModal = bootstrap.Modal.getInstance(document.getElementById('logoutModal'));
-        logoutModal.hide();
-        
-        // Show success modal
-        setTimeout(() => {
-            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-            successModal.show();
-            
-            // Redirect to logout.php after showing success
-            setTimeout(() => {
-                window.location.href = 'logout.php';
-            }, 2000);
-        }, 300);
-        
-    }, 1500);
+<?php
+// Set additional page script for profile functionality
+$page_script .= '
+function showProfile() {
+    // Example profile modal or redirect
+    alert("Fitur profil akan segera hadir!\n\nNama: ' . $user_name . '\nLevel: Administrator");
+    // window.location.href = "profile.php";
 }
-</script>
+';
 
-<style>
-/* Additional animations for sidebar */
-@keyframes slideInLeft {
-    from {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideOutLeft {
-    from {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    to {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    #sidebar {
-        position: absolute;
-        z-index: 1050;
-        height: calc(100vh - 60px);
-        box-shadow: var(--shadow-md);
-    }
-    
-    .content {
-        width: 100%;
-    }
-}
-</style>
-
-</body>
-</html>
+// Include footer (with closing tags and scripts)
+include 'modul/layouts/footer.php';
+?>
